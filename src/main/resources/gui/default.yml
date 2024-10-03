@@ -1,0 +1,30 @@
+labelExample:
+  type: label
+  enable: true
+  locX: "%w%-80*%w%/300"
+  locY: "100"
+  locZ: 50
+  texts:
+    - "test"
+    - "test2"
+textureExample:
+  type: texture
+  enable: true
+  path: "http"
+  locX: "%w%-80*%w%/300"
+  locY: "100"
+  locZ: 50
+  width: "59*%w%/300"
+  height: "20*%w%/300"
+buttonExample:
+  type: button
+  enable: true
+  path: ""
+  locX: "0"
+  locY: "0"
+  locZ: 50
+  width: 59
+  height: 20
+  actions:
+    click: |
+      map.consoleCommand("say "+map.getPlayer().getName()+" click");

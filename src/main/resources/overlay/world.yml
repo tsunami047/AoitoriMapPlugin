@@ -1,0 +1,13 @@
+spawn:
+  enable: |
+    return true;
+  path: "http"
+  x: 0
+  z: 0
+  width: 10
+  height: 20
+  tooltip:
+    - "点击传送至主城"
+  label: "回城"
+  minZoom: 0
+  maxZoom: 8

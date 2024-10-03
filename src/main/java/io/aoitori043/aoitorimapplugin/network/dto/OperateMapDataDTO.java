@@ -1,7 +1,8 @@
-package io.aoitori043.aoitorimapplugin.net.dto;
+package io.aoitori043.aoitorimapplugin.network.dto;
 
+import io.aoitori043.aoitorimapplugin.network.serialize.DataDTO;
+import io.aoitori043.aoitorimapplugin.network.serialize.DataDTOType;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -21,7 +22,7 @@ public class OperateMapDataDTO extends DataDTO {
 
     @Builder
     public OperateMapDataDTO(MapOperateType type) {
-        super("operateMap");
+        super(DataDTOType.OPERATE_MAP);
         this.type = type;
     }
 

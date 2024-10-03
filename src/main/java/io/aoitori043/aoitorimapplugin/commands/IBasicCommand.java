@@ -1,11 +1,10 @@
-package io.aoitori043.ashcan.commands;
+package io.aoitori043.aoitorimapplugin.commands;
 
+import io.aoitori043.aoitorimapplugin.commands.sub.SubCommandReload;
+import io.aoitori043.aoitorimapplugin.config.ConfigHandler;
 import io.aoitori043.aoitoriproject.command.BasicCommand;
 import io.aoitori043.aoitoriproject.command.BasicCommandParameter;
 import io.aoitori043.aoitoriproject.command.SubCommand;
-import io.aoitori043.ashcan.commands.mapper.SubCommandOpen;
-import io.aoitori043.ashcan.commands.mapper.SubCommandReload;
-import io.aoitori043.ashcan.config.ConfigHandler;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -34,14 +33,13 @@ public class IBasicCommand extends BasicCommand {
     @Override
     public Class<? extends SubCommand>[] getSubCommands() {
         return new Class[]{
-                SubCommandOpen.class,
                 SubCommandReload.class
         };
     }
 
     @Override
     public List<String> getAllAlias() {
-        return Arrays.asList("ashcan");
+        return Arrays.asList("map","am");
     }
 
     @Override

@@ -1,11 +1,3 @@
 version: 1.0
 message:
-  prefix: "&7Ashcan &f>> "
-
-blacklist:
-  - "金币"
-
-messageCommand:
-  - "msg %player_name% 此物品禁止丢弃"
-
-guiTitle: "丢弃"
+  prefix: "&7AoitoriMap &f>> "

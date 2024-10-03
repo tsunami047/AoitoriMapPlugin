@@ -1,6 +1,7 @@
-package io.aoitori043.aoitorimapplugin.network.serialize;
+package io.aoitori043.aoitorimapplugin.network.dto;
 
-import io.aoitori043.aoitorimapplugin.network.dto.DataDTO;
+import io.aoitori043.aoitorimapplugin.network.serialize.DataDTO;
+import io.aoitori043.aoitorimapplugin.network.serialize.DataDTOType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;

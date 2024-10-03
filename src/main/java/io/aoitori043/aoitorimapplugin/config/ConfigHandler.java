@@ -1,20 +1,25 @@
-package io.aoitori043.ashcan.config;
+package io.aoitori043.aoitorimapplugin.config;
 
 
-import com.germ.germplugin.api.GermSrcManager;
-import com.germ.germplugin.api.RootType;
+import io.aoitori043.aoitorimapplugin.AoitoriMapPlugin;
+import io.aoitori043.aoitorimapplugin.business.ScriptExecutor;
+import io.aoitori043.aoitorimapplugin.config.mapper.GuiMapper;
 import io.aoitori043.aoitoriproject.config.ConfigProperties;
 import io.aoitori043.aoitoriproject.config.impl.BasicMapper;
-import io.aoitori043.ashcan.Ashcan;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 @ConfigProperties
 public class ConfigHandler extends BasicMapper {
 
     public static ConfigHandler instance;
+
+    public ConfigHandler() {
+        AoitoriMapPlugin.scriptExecutor = new ScriptExecutor();
+    }
 
     public static void load() {
         try {
@@ -26,23 +31,17 @@ public class ConfigHandler extends BasicMapper {
 
     @Override
     public JavaPlugin getPlugin() {
-        return Ashcan.plugin;
+        return AoitoriMapPlugin.plugin;
     }
 
-    public static List<String> blacklist;
-    public static List<String> messageCommand;
-    public static String guiTitle;
 
+    public static LinkedHashMap<String, GuiMapper> gui;
 
     @Override
     public void loadConfig() {
         try {
-            File jexl = new File(getPlugin().getDataFolder(), "jexl");
-            jexl.mkdirs();
-            GermSrcManager.getGermSrcManager().registerSrcFolder(RootType.JEXL, jexl);
-            File hud = new File(getPlugin().getDataFolder(),"gui");
-            hud.mkdirs();
-            GermSrcManager.getGermSrcManager().registerSrcFolder(RootType.GUI,hud);
+            AoitoriMapPlugin.scriptExecutor = new ScriptExecutor();
+
         }catch (Exception e){
             e.printStackTrace();
         }

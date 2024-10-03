@@ -11,16 +11,16 @@ import org.bukkit.entity.Player;
  * @Description: ?
  */
 @Getter
-public class Actions {
+public class ScriptActions {
 
     Player player;
 
-    private Actions(Player player) {
+    private ScriptActions(Player player) {
         this.player = player;
     }
 
-    public static Actions createActions(Player player) {
-        return new Actions(player);
+    public static ScriptActions createActions(Player player) {
+        return new ScriptActions(player);
     }
 
 

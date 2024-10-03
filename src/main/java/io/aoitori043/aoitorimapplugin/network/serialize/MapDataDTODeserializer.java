@@ -1,4 +1,4 @@
-package io.aoitori043.aoitorimapplugin.network.dto;
+package io.aoitori043.aoitorimapplugin.network.serialize;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;

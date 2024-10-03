@@ -1,8 +1,8 @@
-package io.aoitori043.aoitorimapplugin.network.dto;
+package io.aoitori043.aoitorimapplugin.network.serialize;
 
-import io.aoitori043.aoitorimapplugin.network.serialize.DataDTOType;
 import lombok.Data;
 import lombok.Getter;
+import org.bukkit.entity.Player;
 
 /**
  * @Author: natsumi
@@ -18,4 +18,6 @@ public class DataDTO {
     public DataDTO(DataDTOType dataType) {
         this.dataType = dataType;
     }
+
+    public void execute(Player player){}
 }

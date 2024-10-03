@@ -1,17 +1,16 @@
-package io.aoitori043.aoitorimapplugin.net;
+package io.aoitori043.aoitorimapplugin.network;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import io.aoitori043.aoitorimapplugin.AoitoriMapPlugin;
-import io.aoitori043.aoitorimapplugin.net.dto.DataDTO;
-import io.aoitori043.aoitorimapplugin.net.dto.MapDataDTODeserializer;
-import io.aoitori043.aoitorimapplugin.net.dto.OperateMapDataDTO;
+import io.aoitori043.aoitorimapplugin.network.serialize.DataDTO;
+import io.aoitori043.aoitorimapplugin.network.dto.LocateOnDataDTO;
+import io.aoitori043.aoitorimapplugin.network.serialize.MapDataDTODeserializer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.messaging.PluginMessageListener;
 
 import java.nio.charset.StandardCharsets;
-import java.util.LinkedHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -34,7 +33,7 @@ public class NetworkImpl implements PluginMessageListener, Listener {
         singleExecutor.execute(()->{
             String text = new String(data, StandardCharsets.UTF_8);
             DataDTO dataDTO = gson.fromJson(text, DataDTO.class);
-
+            dataDTO.execute(player);
         });
     }
 

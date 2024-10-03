@@ -1,8 +1,8 @@
-package io.aoitori043.ashcan.commands.mapper;
+package io.aoitori043.aoitorimapplugin.commands.sub;
 
 
+import io.aoitori043.aoitorimapplugin.config.ConfigHandler;
 import io.aoitori043.aoitoriproject.command.*;
-import io.aoitori043.ashcan.config.ConfigHandler;
 import org.bukkit.command.CommandSender;
 
 import java.util.List;
