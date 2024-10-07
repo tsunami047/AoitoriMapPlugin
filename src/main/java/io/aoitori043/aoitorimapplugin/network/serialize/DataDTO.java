@@ -19,5 +19,6 @@ public class DataDTO {
         this.dataType = dataType;
     }
 
-    public void execute(Player player){}
+    public void onServerReceived(Player player){}
+    public void onClientReceived(){}
 }

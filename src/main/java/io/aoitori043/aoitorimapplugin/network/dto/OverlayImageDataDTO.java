@@ -1,10 +1,10 @@
 package io.aoitori043.aoitorimapplugin.network.dto;
 
+import io.aoitori043.aoitorimapplugin.config.mapper.OverlayMapper;
 import io.aoitori043.aoitorimapplugin.network.serialize.DataDTO;
 import io.aoitori043.aoitorimapplugin.network.serialize.DataDTOType;
+import lombok.Builder;
 import lombok.Getter;
-
-import java.util.List;
 
 /**
  * @Author: natsumi
@@ -15,21 +15,13 @@ import java.util.List;
 public class OverlayImageDataDTO extends DataDTO {
 
 
-    public OverlayImageDataDTO() {
+    boolean enable;
+    OverlayMapper overlay;
+
+    @Builder
+    public OverlayImageDataDTO(boolean enable, OverlayMapper overlay) {
         super(DataDTOType.OVERLAY_IMAGE);
+        this.enable = enable;
+        this.overlay = overlay;
     }
-
-    String path;
-    String world;
-    double x;
-    double z;
-    int width;
-    int height;
-    List<String> tooltip;
-    String label;
-
-    int minZoom;
-    int maxZoom;
-
-
 }

@@ -4,26 +4,27 @@ package io.aoitori043.aoitorimapplugin.config;
 import io.aoitori043.aoitorimapplugin.AoitoriMapPlugin;
 import io.aoitori043.aoitorimapplugin.business.ScriptExecutor;
 import io.aoitori043.aoitorimapplugin.config.mapper.GuiMapper;
+import io.aoitori043.aoitorimapplugin.config.mapper.OverlayMapper;
 import io.aoitori043.aoitoriproject.config.ConfigProperties;
+import io.aoitori043.aoitoriproject.config.InjectMapper;
+import io.aoitori043.aoitoriproject.config.InjectMappers;
 import io.aoitori043.aoitoriproject.config.impl.BasicMapper;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
 import java.util.LinkedHashMap;
-import java.util.List;
 
 @ConfigProperties
-public class ConfigHandler extends BasicMapper {
+public class MapConfigHandler extends BasicMapper {
 
-    public static ConfigHandler instance;
+    public static MapConfigHandler instance;
 
-    public ConfigHandler() {
+    public MapConfigHandler() {
         AoitoriMapPlugin.scriptExecutor = new ScriptExecutor();
     }
 
     public static void load() {
         try {
-            instance = new ConfigHandler();
+            instance = new MapConfigHandler();
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -35,7 +36,10 @@ public class ConfigHandler extends BasicMapper {
     }
 
 
+    @InjectMappers(dir = "gui")
     public static LinkedHashMap<String, GuiMapper> gui;
+    @InjectMappers(dir = "overlay")
+    public static LinkedHashMap<String, OverlayMapper> overlay;
 
     @Override
     public void loadConfig() {

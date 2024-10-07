@@ -1,6 +1,7 @@
 package io.aoitori043.aoitorimapplugin.business;
 
 import io.aoitori043.aoitorimapplugin.AoitoriMapPlugin;
+import org.jetbrains.annotations.Nullable;
 
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
@@ -39,7 +40,7 @@ public class ScriptExecutor {
         }
     }
 
-    public void addFunction(String functionName, String functionBody){
+    public void addFunction(String functionName, @Nullable String functionBody){
         if (functionBody == null || functionBody.isEmpty()) return;
         try {
             String script = "function " + functionName + "(map) { " + functionBody + " }";

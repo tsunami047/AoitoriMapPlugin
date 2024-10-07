@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import io.aoitori043.aoitorimapplugin.AoitoriMapPlugin;
 import io.aoitori043.aoitorimapplugin.network.serialize.DataDTO;
-import io.aoitori043.aoitorimapplugin.network.dto.LocateOnDataDTO;
 import io.aoitori043.aoitorimapplugin.network.serialize.MapDataDTODeserializer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
@@ -33,7 +32,7 @@ public class NetworkImpl implements PluginMessageListener, Listener {
         singleExecutor.execute(()->{
             String text = new String(data, StandardCharsets.UTF_8);
             DataDTO dataDTO = gson.fromJson(text, DataDTO.class);
-            dataDTO.execute(player);
+            dataDTO.onServerReceived(player);
         });
     }
 

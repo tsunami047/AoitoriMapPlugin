@@ -2,7 +2,7 @@ package io.aoitori043.aoitorimapplugin.network.dto;
 
 import io.aoitori043.aoitorimapplugin.AoitoriMapPlugin;
 import io.aoitori043.aoitorimapplugin.business.ScriptActions;
-import io.aoitori043.aoitorimapplugin.config.ConfigHandler;
+import io.aoitori043.aoitorimapplugin.config.MapConfigHandler;
 import io.aoitori043.aoitorimapplugin.config.mapper.GuiMapper;
 import io.aoitori043.aoitorimapplugin.network.serialize.DataDTO;
 import io.aoitori043.aoitorimapplugin.network.serialize.DataDTOType;
@@ -10,8 +10,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 import org.bukkit.entity.Player;
-
-import java.util.LinkedHashMap;
 
 /**
  * @Author: natsumi
@@ -41,8 +39,8 @@ public class ActionsDataDTO extends DataDTO {
     }
 
     @Override
-    public void execute(Player player){
-        GuiMapper guiMapper = ConfigHandler.gui.get(guiName);
+    public void onServerReceived(Player player){
+        GuiMapper guiMapper = MapConfigHandler.gui.get(guiName);
         if (guiMapper == null) return;
         String methodIndex = this.clickMethod.toString().toLowerCase();
         ScriptActions scriptActions = ScriptActions.createActions(player);

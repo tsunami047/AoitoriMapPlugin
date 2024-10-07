@@ -1,7 +1,7 @@
 package io.aoitori043.aoitorimapplugin.commands;
 
-import io.aoitori043.aoitorimapplugin.commands.sub.SubCommandReload;
-import io.aoitori043.aoitorimapplugin.config.ConfigHandler;
+import io.aoitori043.aoitorimapplugin.commands.sub.MapCommandReload;
+import io.aoitori043.aoitorimapplugin.config.MapConfigHandler;
 import io.aoitori043.aoitoriproject.command.BasicCommand;
 import io.aoitori043.aoitoriproject.command.BasicCommandParameter;
 import io.aoitori043.aoitoriproject.command.SubCommand;
@@ -19,21 +19,21 @@ import java.util.List;
  * @Description: ?
  */
 @BasicCommandParameter
-public class IBasicCommand extends BasicCommand {
+public class MapBasicCommand extends BasicCommand {
 
-    public IBasicCommand(JavaPlugin plugin) {
+    public MapBasicCommand(JavaPlugin plugin) {
         super(plugin.getName(), plugin);
     }
 
 
     public String getPrefix() {
-        return ConfigHandler.instance.pluginPrefix;
+        return MapConfigHandler.instance.pluginPrefix;
     }
 
     @Override
     public Class<? extends SubCommand>[] getSubCommands() {
         return new Class[]{
-                SubCommandReload.class
+                MapCommandReload.class
         };
     }
 
