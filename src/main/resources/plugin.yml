@@ -1,3 +1,5 @@
 name: AoitoriMapPlugin
 version: '${project.version}'
 main: io.aoitori043.aoitorimapplugin.AoitoriMapPlugin
+depend:
+  - AoitoriProject

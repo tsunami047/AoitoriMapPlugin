@@ -1,6 +1,8 @@
 package io.aoitori043.aoitorimapplugin.commands;
 
+import io.aoitori043.aoitorimapplugin.commands.sub.MapCommandDisplay;
 import io.aoitori043.aoitorimapplugin.commands.sub.MapCommandReload;
+import io.aoitori043.aoitorimapplugin.commands.sub.MapCommandTest;
 import io.aoitori043.aoitorimapplugin.config.MapConfigHandler;
 import io.aoitori043.aoitoriproject.command.BasicCommand;
 import io.aoitori043.aoitoriproject.command.BasicCommandParameter;
@@ -33,6 +35,8 @@ public class MapBasicCommand extends BasicCommand {
     @Override
     public Class<? extends SubCommand>[] getSubCommands() {
         return new Class[]{
+                MapCommandDisplay.class,
+                MapCommandTest.class,
                 MapCommandReload.class
         };
     }

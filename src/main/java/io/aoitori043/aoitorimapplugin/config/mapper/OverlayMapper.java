@@ -24,6 +24,7 @@ public class OverlayMapper {
     String enable;
     String path;
     double x;
+    double y;
     double z;
     String width;
     String height;

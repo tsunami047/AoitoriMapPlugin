@@ -17,7 +17,8 @@ public class OperateMapDataDTO extends DataDTO {
 
     public enum MapOperateType{
         OPEN,
-        CLOSE
+        CLOSE,
+        REFRESH
     }
 
     @Builder

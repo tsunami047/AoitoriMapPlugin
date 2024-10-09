@@ -19,11 +19,12 @@ public class MapConfigHandler extends BasicMapper {
     public static MapConfigHandler instance;
 
     public MapConfigHandler() {
-        AoitoriMapPlugin.scriptExecutor = new ScriptExecutor();
+        super();
     }
 
     public static void load() {
         try {
+            AoitoriMapPlugin.scriptExecutor = new ScriptExecutor();
             instance = new MapConfigHandler();
         }catch (Exception e){
             e.printStackTrace();
