@@ -49,6 +49,5 @@ public class ActionsDataDTO extends DataDTO {
         }catch (Exception e){
             e.printStackTrace();
         }
-
     }
 }

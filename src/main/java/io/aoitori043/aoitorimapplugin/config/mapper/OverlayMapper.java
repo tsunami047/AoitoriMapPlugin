@@ -22,6 +22,7 @@ public class OverlayMapper {
 
     String index;
     String enable;
+    String world;
     String path;
     double x;
     double y;
@@ -32,6 +33,17 @@ public class OverlayMapper {
     String label;
     int minZoom;
     int maxZoom;
+    public String label_text;
+    public String label_scale;
+    public String label_color;
+    public String label_backgroundColor;
+    public String label_opacity;
+    public String label_backgroundOpacity;
+    public String label_fontShadow;
+    public String label_minZoom;
+    public String label_maxZoom;
+    public String label_offsetX;
+    public String label_offsetY;
 
     LinkedHashMap<String,String> actions;
 

@@ -27,6 +27,7 @@ public final class AoitoriMapPlugin extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(networkImpl,this);
         MapDatabaseClient.DatabaseListener databaseListener = new MapDatabaseClient.DatabaseListener();
         Bukkit.getPluginManager().registerEvents(databaseListener,this);
+        Bukkit.getScheduler().runTaskAsynchronously(this, MapConfigHandler::init);
     }
 
     @Override

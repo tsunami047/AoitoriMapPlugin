@@ -1,6 +1,7 @@
 spawn:
   enable: |
     return true;
+  world: "world"
   path: "http"
   x: 0
   z: 0
@@ -8,6 +9,17 @@ spawn:
   height: 20
   tooltip:
     - "点击传送至主城"
-  label: "回城"
   minZoom: 0
   maxZoom: 8
+  label: "回城"
+  label_text: "示例"
+  label_scale: 1
+  label_color: "0xffffff"
+  label_backgroundColor: "0x000000"
+  label_opacity: 1
+  label_backgroundOpacity: 0.5
+  label_fontShadow: true
+  label_minZoom: 0
+  label_maxZoom: 8
+  label_offsetX: 0
+  label_offsetY: 0
