@@ -30,6 +30,7 @@ public class OperateMapDataDTO extends DataDTO {
     }
 
     public MapOperateType type;
+    
 
 
 
