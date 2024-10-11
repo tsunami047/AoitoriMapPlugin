@@ -24,6 +24,7 @@ import java.nio.file.*;
 import static java.nio.file.StandardWatchEventKinds.*;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 
 @ConfigProperties
 public class MapConfigHandler extends BasicMapper {
@@ -92,6 +93,8 @@ public class MapConfigHandler extends BasicMapper {
     public static LinkedHashMap<String, GuiMapper> gui;
     @InjectMappers(dir = "overlay")
     public static LinkedHashMap<String, OverlayMapper> overlay;
+
+    public static List<String> permanentGUI;
 
     @Override
     public void loadConfig() {
