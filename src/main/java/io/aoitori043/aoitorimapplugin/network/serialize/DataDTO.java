@@ -1,5 +1,6 @@
 package io.aoitori043.aoitorimapplugin.network.serialize;
 
+import io.aoitori043.aoitorimapplugin.network.NetworkImpl;
 import lombok.Data;
 import lombok.Getter;
 import org.bukkit.entity.Player;
@@ -21,4 +22,8 @@ public class DataDTO {
 
     public void onServerReceived(Player player){}
     public void onClientReceived(){}
+
+    public void send(Player player){
+        NetworkImpl.sendPluginMessageToPlayer(player,this);
+    }
 }

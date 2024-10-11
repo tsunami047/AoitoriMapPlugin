@@ -10,6 +10,7 @@ import lombok.Getter;
 */
 @Getter
 public enum DataDTOType {
+    RenderWorld(RenderWorldDataDTO.class),
     GUIFile(GuiFileDataDTO.class),
     ACTIONS(ActionsDataDTO.class),
     OVERLAY_IMAGE(OverlayImageDataDTO.class),

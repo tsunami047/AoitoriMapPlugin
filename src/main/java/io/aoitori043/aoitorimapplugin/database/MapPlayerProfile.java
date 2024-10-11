@@ -19,9 +19,6 @@ public class MapPlayerProfile {
     String playerName;
     OverlayManager overlayManager;
 
-    public void send(){
-
-    }
 
 
 
