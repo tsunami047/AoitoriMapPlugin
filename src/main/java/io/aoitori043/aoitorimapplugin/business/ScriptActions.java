@@ -1,9 +1,13 @@
 package io.aoitori043.aoitorimapplugin.business;
 
+import io.aoitori043.aoitoriproject.AoitoriProject;
+import io.aoitori043.aoitoriproject.utils.CMDUtils;
 import io.aoitori043.aoitoriproject.utils.PlaceholderAPIUtil;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+
+import java.util.Collections;
 
 /**
  * @Author: natsumi
@@ -23,11 +27,14 @@ public class ScriptActions {
         return new ScriptActions(player);
     }
 
+    public String getPoint(String dataName){
+        return AoitoriProject.pointManager.get(this.getPlayer().getName(),dataName);
+    }
+
 
     public void consoleCommand(String cmd){
         if (cmd == null || cmd.isEmpty()) return;
-        String command = PlaceholderAPIUtil.throughPAPI(player, cmd);
-        Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),command);
+        CMDUtils.performCmd(player.getName(), Collections.singletonList(PlaceholderAPIUtil.throughPAPI(player, cmd)));
     }
 
     public String parsePAPIVariables(String arg){

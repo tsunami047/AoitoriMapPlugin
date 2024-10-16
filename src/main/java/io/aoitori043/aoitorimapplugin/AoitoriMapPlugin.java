@@ -1,5 +1,7 @@
 package io.aoitori043.aoitorimapplugin;
 
+import io.aoitori043.aoitorimapplugin.business.BukkitEventListener;
+import io.aoitori043.aoitorimapplugin.business.JourneyMapImpl;
 import io.aoitori043.aoitorimapplugin.business.ScriptExecutor;
 import io.aoitori043.aoitorimapplugin.commands.MapBasicCommand;
 import io.aoitori043.aoitorimapplugin.config.MapConfigHandler;
@@ -14,6 +16,7 @@ public final class AoitoriMapPlugin extends JavaPlugin {
     public static AoitoriMapPlugin plugin;
     public static NetworkImpl networkImpl;
     public static ScriptExecutor scriptExecutor;
+    public static JourneyMapImpl journeyMapImpl;
 
     @Override
     public void onEnable() {
@@ -28,6 +31,9 @@ public final class AoitoriMapPlugin extends JavaPlugin {
         MapDatabaseClient.DatabaseListener databaseListener = new MapDatabaseClient.DatabaseListener();
         Bukkit.getPluginManager().registerEvents(databaseListener,this);
         Bukkit.getScheduler().runTaskAsynchronously(this, MapConfigHandler::init);
+        journeyMapImpl = new JourneyMapImpl();
+        journeyMapImpl.init();
+        Bukkit.getPluginManager().registerEvents(new BukkitEventListener(),this);
     }
 
     @Override

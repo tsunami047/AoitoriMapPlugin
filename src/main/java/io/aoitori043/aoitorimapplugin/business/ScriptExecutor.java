@@ -3,10 +3,9 @@ package io.aoitori043.aoitorimapplugin.business;
 import io.aoitori043.aoitorimapplugin.AoitoriMapPlugin;
 import org.jetbrains.annotations.Nullable;
 
-import javax.script.Invocable;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
+import javax.script.*;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @Author: natsumi
@@ -60,9 +59,22 @@ public class ScriptExecutor {
                 throw new UnsupportedOperationException("ScriptEngine does not support invoking functions");
             }
         }catch (Exception e){
+            checkRegisteredFunctions();
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void checkRegisteredFunctions() {
+        if (engine instanceof Invocable) {
+            Invocable invocable = (Invocable) engine;
+            ScriptContext context = engine.getContext();
+            Set<String> strings = context.getBindings(ScriptContext.ENGINE_SCOPE).keySet();
+            System.out.println("Registered functions:");
+            for (String key : strings) {
+                System.out.println(key);
+            }
+        }
     }
 
 

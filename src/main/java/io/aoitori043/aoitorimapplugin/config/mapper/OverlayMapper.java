@@ -24,26 +24,25 @@ public class OverlayMapper {
     String enable;
     String world;
     String path;
-    double x;
-    double y;
-    double z;
+    String x;
+    //    String y;
+    String z;
     String width;
     String height;
     List<String> tooltip;
-    String label;
-    int minZoom;
-    int maxZoom;
-    public String label_text;
-    public String label_scale;
-    public String label_color;
-    public String label_backgroundColor;
-    public String label_opacity;
-    public String label_backgroundOpacity;
-    public String label_fontShadow;
-    public String label_minZoom;
-    public String label_maxZoom;
-    public String label_offsetX;
-    public String label_offsetY;
+    String minZoom;
+    String maxZoom;
+    public String labelText;
+    public String labelScale;
+    public String labelColor;
+    public String labelBackgroundColor;
+    public String labelOpacity;
+    public String labelBackgroundOpacity;
+    public String labelFontShadow;
+    public String labelMinZoom;
+    public String labelMaxZoom;
+    public String labelOffsetX;
+    public String labelOffsetY;
 
     LinkedHashMap<String,String> actions;
 
@@ -51,18 +50,29 @@ public class OverlayMapper {
     }
 
     @Builder
-    public OverlayMapper(String index, String enable, String path, double x, double z, String width, String height, List<String> tooltip, String label, int minZoom, int maxZoom, LinkedHashMap<String, String> actions) {
+    public OverlayMapper(String index, String enable, String world, String path, String x, String z, String width, String height, List<String> tooltip, String minZoom, String maxZoom, String labelText, String labelScale, String labelColor, String labelBackgroundColor, String labelOpacity, String labelBackgroundOpacity, String labelFontShadow, String labelMinZoom, String labelMaxZoom, String labelOffsetX, String labelOffsetY, LinkedHashMap<String, String> actions) {
         this.index = index;
         this.enable = enable;
+        this.world = world;
         this.path = path;
         this.x = x;
         this.z = z;
         this.width = width;
         this.height = height;
         this.tooltip = tooltip;
-        this.label = label;
         this.minZoom = minZoom;
         this.maxZoom = maxZoom;
+        this.labelText = labelText;
+        this.labelScale = labelScale;
+        this.labelColor = labelColor;
+        this.labelBackgroundColor = labelBackgroundColor;
+        this.labelOpacity = labelOpacity;
+        this.labelBackgroundOpacity = labelBackgroundOpacity;
+        this.labelFontShadow = labelFontShadow;
+        this.labelMinZoom = labelMinZoom;
+        this.labelMaxZoom = labelMaxZoom;
+        this.labelOffsetX = labelOffsetX;
+        this.labelOffsetY = labelOffsetY;
         this.actions = actions;
     }
 

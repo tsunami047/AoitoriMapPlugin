@@ -29,23 +29,23 @@ public class OverlayManager {
         String index = overlay.getIndex();
         if (index == null) throw new NullPointerException("Cannot be null pointer");
         overMap.put(index,overlay);
-        OverlayImageDataDTO overlayImage = OverlayImageDataDTO.builder()
+        OverlayImageDataDTO.builder()
                 .overlay(overlay)
                 .enable(true)
-                .build();
-        NetworkImpl.sendPluginMessageToPlayer(player,overlayImage);
+                .build()
+                .send(player);
     }
 
     public void removeOverlayImpl(String index){
         if (index == null) throw new NullPointerException("Cannot be null pointer");
         overMap.remove(index);
-        OverlayImageDataDTO overlayImage = OverlayImageDataDTO.builder()
+        OverlayImageDataDTO.builder()
                 .overlay(OverlayMapper.builder()
                         .index(index)
                         .build()
                 )
                 .enable(false)
-                .build();
-        NetworkImpl.sendPluginMessageToPlayer(player,overlayImage);
+                .build()
+                .send(player);
     }
 }

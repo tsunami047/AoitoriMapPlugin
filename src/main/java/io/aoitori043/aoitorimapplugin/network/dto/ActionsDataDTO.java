@@ -41,7 +41,7 @@ public class ActionsDataDTO extends DataDTO {
     @Override
     public void onServerReceived(Player player){
         GuiMapper guiMapper = MapConfigHandler.gui.get(guiName);
-        if (guiMapper == null) return;
+        if (guiMapper == null && !guiName.equals("overlay")) return;
         String methodIndex = this.clickMethod.toString().toLowerCase();
         ScriptActions scriptActions = ScriptActions.createActions(player);
         try {

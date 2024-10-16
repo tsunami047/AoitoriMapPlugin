@@ -39,7 +39,7 @@ public class GuiMapper {
     LinkedHashMap<String,String> actions;
 
     @Getter
-    public static class MapLabel extends GuiMapper{
+    public static class MapLabel extends GuiComponent{
         String index;
         String type;
         String enable;
@@ -50,7 +50,7 @@ public class GuiMapper {
     }
 
     @Getter
-    public static class MapTexture extends GuiMapper{
+    public static class MapTexture extends GuiComponent{
         String index;
         String type;
         String enable;
@@ -63,7 +63,7 @@ public class GuiMapper {
     }
 
     @Getter
-    public static class MapButton extends GuiMapper{
+    public static class MapButton extends GuiComponent{
         String index;
         String type;
         String enable;
