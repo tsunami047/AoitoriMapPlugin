@@ -10,6 +10,7 @@ import lombok.Getter;
 */
 @Getter
 public enum DataDTOType {
+    OPERATE_GUI(GuiOperateDataDTO.class),
     VARIABLE_DATA(VariablesDataDTO.class),
     WORLD_REQUEST(WorldRequestDataDTO.class),
     RENDER_WORLD(RenderWorldDataDTO.class),

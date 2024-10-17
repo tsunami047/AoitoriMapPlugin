@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import io.aoitori043.aoitorimapplugin.AoitoriMapPlugin;
 import io.aoitori043.aoitorimapplugin.network.serialize.DataDTO;
+import io.aoitori043.aoitorimapplugin.network.serialize.MapComponentDeserializer;
 import io.aoitori043.aoitorimapplugin.network.serialize.MapDataDTODeserializer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
@@ -24,6 +25,7 @@ public class NetworkImpl implements PluginMessageListener, Listener {
     public static final String CHANNEL_NAME = "aoitorimap";
     public static final Gson gson = new GsonBuilder()
             .registerTypeAdapter(DataDTO.class, new MapDataDTODeserializer())
+            .registerTypeAdapter(DataDTO.class, new MapComponentDeserializer())
             .create();
 
     @Override

@@ -32,58 +32,48 @@ public class GuiMapper {
                     @GetClassifyMapping.ClassDesignation(key = "button",value = MapButton.class)
             }
     )
-    LinkedHashMap<String,GuiMapper> guiMapper;
+    LinkedHashMap<String,GuiComponent> components;
 
-    //override methods
-    @NonConfigProperty
-    LinkedHashMap<String,String> actions;
 
     @Getter
     public static class MapLabel extends GuiComponent{
-        String index;
-        String type;
-        String enable;
-        String locX;
-        String locY;
-        String locZ;
+        String hAlign;
+        String vAlign;
+        String bgColor;
+        String bgAlpha;
+        String color;
+        String alpha;
+        String fontScala;
+        String fontShadow;
+        String rotation;
         List<String> texts;
     }
 
     @Getter
     public static class MapTexture extends GuiComponent{
-        String index;
-        String type;
-        String enable;
         String path;
-        String locX;
-        String locY;
-        String locZ;
         String width;
         String height;
+        String rotation;
+        String alpha;
     }
 
     @Getter
-    public static class MapButton extends GuiComponent{
-        String index;
-        String type;
-        String enable;
-        String path;
-        String locX;
-        String locY;
-        String locZ;
+    public static class MapButton extends MapLabel{
+        String defaultPath;
+        String pressedPath;
+        String hoverPath;
         String width;
         String height;
-
-        LinkedHashMap<String,String> actions;
     }
 
     @Run(after = "guiMapper")
     void load(){
-        for (Map.Entry<String, GuiMapper> entry : guiMapper.entrySet()) {
-            GuiMapper guiMapper = entry.getValue();
+        for (Map.Entry<String, GuiComponent> entry : components.entrySet()) {
+            GuiComponent guiComponent = entry.getValue();
             for (ActionsDataDTO.ClickMethod value : ActionsDataDTO.ClickMethod.values()) {
                 String key = value.toString().toLowerCase();
-                String script = guiMapper.getActions().get(key);
+                String script = guiComponent.getActions().get(key);
                 AoitoriMapPlugin.scriptExecutor.addFunction(this.index+"_"+entry.getKey()+"_"+key,script);
             }
         }
