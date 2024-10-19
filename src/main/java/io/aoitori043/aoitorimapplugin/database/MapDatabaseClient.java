@@ -1,9 +1,13 @@
 package io.aoitori043.aoitorimapplugin.database;
 
+import io.aoitori043.aoitorimapplugin.business.OverlayManager;
+import io.aoitori043.aoitorimapplugin.config.MapConfigHandler;
+import io.aoitori043.aoitoriproject.AoitoriProject;
 import io.aoitori043.aoitoriproject.CanaryClientImpl;
 import io.aoitori043.aoitoriproject.database.orm.SQLClient;
 import io.aoitori043.aoitoriproject.script.AoitoriPlayerJoinEvent;
 import io.aoitori043.aoitoriproject.script.AoitoriPlayerQuitEvent;
+import kilim.Task;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -32,6 +36,10 @@ public class MapDatabaseClient {
         public void onAoitoriJoin(AoitoriPlayerJoinEvent e){
             Player player = e.getPlayer();
             cache.put(player.getName(),new MapPlayerProfile(e.getPlayer().getName()));
+            AoitoriProject.kilimScheduler.forkJoinExecute(()->{
+                Task.sleep(MapConfigHandler.sendDataDelay);
+                OverlayManager.sendAllOverlayData(player);
+            });
         }
 
         @EventHandler

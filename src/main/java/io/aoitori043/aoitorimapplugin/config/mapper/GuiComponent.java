@@ -18,6 +18,8 @@ public class GuiComponent {
 
     @Inject(type = Inject.InjectType.INDEX)
     String index;
+    @Inject(type = Inject.InjectType.PARENT_NAME)
+    String guiName;
     String enable;
     ComponentType type;
     String x;

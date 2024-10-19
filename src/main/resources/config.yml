@@ -2,5 +2,6 @@ version: 1.0
 message:
   prefix: "&7AoitoriMap &f>> "
 
+sendDataDelay: 2000
 permanentGUI:
   - default

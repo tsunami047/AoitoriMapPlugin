@@ -1,8 +1,10 @@
 package io.aoitori043.aoitorimapplugin.database;
 
+import io.aoitori043.aoitorimapplugin.business.GuiManager;
 import io.aoitori043.aoitorimapplugin.business.OverlayManager;
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.entity.Player;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,10 +17,14 @@ import java.util.Map;
 @Getter
 public class MapPlayerProfile {
 
-    public MapPlayerProfile(String playerName) {
-        this.playerName = playerName;
-        this.overlayManager = new OverlayManager(playerName);
+    public MapPlayerProfile(Player player) {
+        this.playerName = player.getName();
+        this.overlayManager = new OverlayManager(player);
         this.dataMap = new HashMap<>();
+        this.guiManager = GuiManager.builder()
+                .player(player)
+                .build();
+
     }
 
     String playerName;
@@ -26,6 +32,7 @@ public class MapPlayerProfile {
     String renderWorld;
     Map<String,Object> dataMap;
     OverlayManager overlayManager;
+    GuiManager guiManager;
 
 
 

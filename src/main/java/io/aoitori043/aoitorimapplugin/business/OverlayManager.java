@@ -1,7 +1,10 @@
 package io.aoitori043.aoitorimapplugin.business;
 
+import io.aoitori043.aoitorimapplugin.config.MapConfigHandler;
 import io.aoitori043.aoitorimapplugin.config.mapper.OverlayMapper;
-import io.aoitori043.aoitorimapplugin.network.NetworkImpl;
+import io.aoitori043.aoitorimapplugin.database.MapDatabaseClient;
+import io.aoitori043.aoitorimapplugin.database.MapPlayerProfile;
+import io.aoitori043.aoitorimapplugin.network.dto.OperateMapDataDTO;
 import io.aoitori043.aoitorimapplugin.network.dto.OverlayImageDataDTO;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -20,9 +23,18 @@ public class OverlayManager {
     @Getter
     LinkedHashMap<String, OverlayMapper> overMap;
 
-    public OverlayManager(String playerName) {
+    public OverlayManager(Player player) {
         this.overMap = new LinkedHashMap<>();
-        this.player = Bukkit.getPlayer(playerName);
+        this.player = player;
+    }
+
+    public static void sendAllOverlayData(Player player) {
+        MapPlayerProfile mapPlayerProfile = MapDatabaseClient.getMapPlayerProfile(player.getName());
+        OverlayManager overlayManager = mapPlayerProfile.getOverlayManager();
+        for (OverlayMapper value : MapConfigHandler.overlay.values()) {
+            overlayManager.addOverlayImpl(value);
+        }
+        OperateMapDataDTO.builder().type(OperateMapDataDTO.MapOperateType.REFRESH).build().send(player);
     }
 
     public void addOverlayImpl(OverlayMapper overlay){

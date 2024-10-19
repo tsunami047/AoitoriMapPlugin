@@ -2,12 +2,15 @@ package io.aoitori043.aoitorimapplugin.config.mapper;
 
 import io.aoitori043.aoitorimapplugin.AoitoriMapPlugin;
 import io.aoitori043.aoitorimapplugin.business.AoitoriMapAPI;
+import io.aoitori043.aoitorimapplugin.business.gui.MapGuiImpl;
+import io.aoitori043.aoitorimapplugin.business.gui.impl.MapComponent;
 import io.aoitori043.aoitorimapplugin.network.dto.ActionsDataDTO;
 import io.aoitori043.aoitoriproject.config.ConfigProperties;
 import io.aoitori043.aoitoriproject.config.GetClassifyMapping;
 import io.aoitori043.aoitoriproject.config.NonConfigProperty;
 import io.aoitori043.aoitoriproject.config.Run;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.beans.Transient;
 import java.util.LinkedHashMap;
@@ -34,6 +37,16 @@ public class GuiMapper {
     )
     LinkedHashMap<String,GuiComponent> components;
 
+    public static GuiMapper convertToGuiMapper(MapGuiImpl mapGui){
+        GuiMapper guiMapper = new GuiMapper();
+        guiMapper.index = mapGui.getGuiName();
+        guiMapper.components = new LinkedHashMap<>();
+        for (Map.Entry<String, MapComponent> entry : mapGui.getComponents().entrySet()) {
+            MapComponent value = entry.getValue();
+            guiMapper.components.put(entry.getKey(),(GuiComponent)value);
+        }
+        return guiMapper;
+    }
 
     @Getter
     public static class MapLabel extends GuiComponent{
