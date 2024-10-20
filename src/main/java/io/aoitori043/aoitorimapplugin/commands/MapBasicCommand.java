@@ -115,7 +115,6 @@ public class MapBasicCommand extends BasicCommand {
     }
 
     @Parameter(argument = "generateKey", help = "生成密钥")
-    @ParameterSpecification(index = 0, tip = "player", type = ParameterSpecification.Type.Player,nullable = true)
     public void generateKey(CommandSender sender, List<SubCommand.ArgumentHelper> arguments) {
         try {
             SecretKey secretKey = ImageEncryptor.generateSecretKey();
@@ -124,6 +123,21 @@ public class MapBasicCommand extends BasicCommand {
         }catch (Exception e){
             e.printStackTrace();
         }
-
     }
+
+    @Parameter(argument = "encrypt", help = "加密本体文件")
+    @ParameterSpecification(index = 0, tip = "player", type = ParameterSpecification.Type.Player,nullable = true)
+    public void encrypt(CommandSender sender, List<SubCommand.ArgumentHelper> arguments) {
+        try {
+            OperateMapDataDTO.builder()
+                    .type(OperateMapDataDTO.MapOperateType.ENCRYPT)
+                    .build()
+                    .send(arguments.get(0).getAsPlayer());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
 }
+
