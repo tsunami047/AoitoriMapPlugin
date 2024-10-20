@@ -59,13 +59,15 @@ public class MapConfigHandler extends BasicMapper {
     }
 
 
-    @InjectMappers(dir = "gui")
+    @InjectMappers(dir = "gui",singe = true)
     public static LinkedHashMap<String, GuiMapper> gui;
     @InjectMappers(dir = "overlay")
     public static LinkedHashMap<String, OverlayMapper> overlay;
 
     public static List<String> permanentGUI;
     public static int sendDataDelay;
+    public static boolean autoReloadConfig;
+    public static String resourcesKey;
 
     @Override
     public void loadConfig() {

@@ -9,8 +9,11 @@ import io.aoitori043.aoitoriproject.config.ConfigProperties;
 import io.aoitori043.aoitoriproject.config.GetClassifyMapping;
 import io.aoitori043.aoitoriproject.config.NonConfigProperty;
 import io.aoitori043.aoitoriproject.config.Run;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.With;
+import lombok.experimental.Accessors;
 
 import java.beans.Transient;
 import java.util.LinkedHashMap;
@@ -24,6 +27,7 @@ import java.util.Map;
  */
 @ConfigProperties
 @Getter
+@Setter
 public class GuiMapper {
 
     String index;
@@ -43,12 +47,14 @@ public class GuiMapper {
         guiMapper.components = new LinkedHashMap<>();
         for (Map.Entry<String, MapComponent> entry : mapGui.getComponents().entrySet()) {
             MapComponent value = entry.getValue();
-            guiMapper.components.put(entry.getKey(),(GuiComponent)value);
+            guiMapper.components.put(entry.getKey(),value.getGuiComponent());
         }
         return guiMapper;
     }
 
     @Getter
+    @Setter
+    @Accessors(chain = true)
     public static class MapLabel extends GuiComponent{
         String hAlign;
         String vAlign;
@@ -63,6 +69,8 @@ public class GuiMapper {
     }
 
     @Getter
+    @Setter
+    @Accessors(chain = true)
     public static class MapTexture extends GuiComponent{
         String path;
         String width;
@@ -72,6 +80,8 @@ public class GuiMapper {
     }
 
     @Getter
+    @Setter
+    @Accessors(chain = true)
     public static class MapButton extends MapLabel{
         String defaultPath;
         String pressedPath;

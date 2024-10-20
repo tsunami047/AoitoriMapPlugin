@@ -16,11 +16,13 @@ public class GuiOperateDataDTO extends DataDTO {
 
     String guiName;
     OperateType operateType;
+    boolean hud;
 
     @Builder
-    public GuiOperateDataDTO(String guiName, OperateType operateType) {
+    public GuiOperateDataDTO(String guiName, OperateType operateType, boolean hud) {
         super(DataDTOType.OPERATE_GUI);
         this.guiName = guiName;
         this.operateType = operateType;
+        this.hud = hud;
     }
 }

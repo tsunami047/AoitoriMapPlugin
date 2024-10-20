@@ -10,6 +10,8 @@ import lombok.Getter;
 */
 @Getter
 public enum DataDTOType {
+    SECRET_KEY(SecretKeyDataDTO.class),
+    UPDATE_COMPONENTS(UpdateComponentsDataDTO.class),
     OPERATE_GUI(GuiOperateDataDTO.class),
     VARIABLE_DATA(VariablesDataDTO.class),
     WORLD_REQUEST(WorldRequestDataDTO.class),

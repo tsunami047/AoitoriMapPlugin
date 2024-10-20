@@ -4,9 +4,12 @@ import io.aoitori043.aoitorimapplugin.database.MapDatabaseClient;
 import io.aoitori043.aoitorimapplugin.database.MapPlayerProfile;
 import io.aoitori043.aoitorimapplugin.network.serialize.DataDTO;
 import io.aoitori043.aoitorimapplugin.network.serialize.DataDTOType;
+import lombok.Builder;
 import org.bukkit.entity.Player;
 
 import java.util.Map;
+
+import static io.aoitori043.aoitorimapplugin.network.serialize.DataDTOType.VARIABLE_DATA;
 
 /**
  * @Author: natsumi
@@ -15,17 +18,12 @@ import java.util.Map;
  */
 public class VariablesDataDTO extends DataDTO {
 
-    public VariablesDataDTO() {
-        super(DataDTOType.VARIABLE_DATA);
-    }
-
     Map<String,Object> map;
 
-    @Override
-    public void send(Player player) {
-        MapPlayerProfile mapPlayerProfile = MapDatabaseClient.getMapPlayerProfile(player.getName());
-        Map<String, Object> dataMap = mapPlayerProfile.getDataMap();
-        dataMap.putAll(map);
-        super.send(player);
+    @Builder
+    public VariablesDataDTO( Map<String, Object> map) {
+        super(VARIABLE_DATA);
+        this.map = map;
     }
+
 }

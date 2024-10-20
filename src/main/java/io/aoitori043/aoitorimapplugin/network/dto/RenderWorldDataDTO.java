@@ -17,9 +17,4 @@ public class RenderWorldDataDTO extends DataDTO {
         this.worldName = worldName;
     }
 
-    @Override
-    public void send(Player player) {
-        MapDatabaseClient.getMapPlayerProfile(player.getName()).setRenderWorld(worldName);
-        super.send(player);
-    }
 }

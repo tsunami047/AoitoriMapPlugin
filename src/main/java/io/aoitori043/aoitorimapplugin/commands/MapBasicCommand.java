@@ -1,6 +1,8 @@
 package io.aoitori043.aoitorimapplugin.commands;
 
+import io.aoitori043.aoitorimapplugin.AoitoriMapPlugin;
 import io.aoitori043.aoitorimapplugin.business.OverlayManager;
+import io.aoitori043.aoitorimapplugin.config.ImageEncryptor;
 import io.aoitori043.aoitorimapplugin.config.MapConfigHandler;
 import io.aoitori043.aoitorimapplugin.config.mapper.OverlayMapper;
 import io.aoitori043.aoitorimapplugin.database.MapDatabaseClient;
@@ -15,6 +17,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import javax.crypto.SecretKey;
 import java.util.Arrays;
 import java.util.List;
 
@@ -109,5 +112,18 @@ public class MapBasicCommand extends BasicCommand {
                 .type(OperateMapDataDTO.MapOperateType.REFRESH)
                 .build()
                 .send(arguments.get(0)!=null ? arguments.get(0).getAsPlayer() : Bukkit.getPlayer(sender.getName()));
+    }
+
+    @Parameter(argument = "generateKey", help = "生成密钥")
+    @ParameterSpecification(index = 0, tip = "player", type = ParameterSpecification.Type.Player,nullable = true)
+    public void generateKey(CommandSender sender, List<SubCommand.ArgumentHelper> arguments) {
+        try {
+            SecretKey secretKey = ImageEncryptor.generateSecretKey();
+            String key = ImageEncryptor.keyToString(secretKey);
+            AoitoriMapPlugin.plugin.getLogger().info("复制替换到config.yml的resourcesKey中，新的密钥："+key);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 }

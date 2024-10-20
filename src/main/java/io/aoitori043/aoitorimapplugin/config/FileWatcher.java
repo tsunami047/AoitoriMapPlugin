@@ -1,7 +1,11 @@
 package io.aoitori043.aoitorimapplugin.config;
 
 import io.aoitori043.aoitorimapplugin.AoitoriMapPlugin;
+import io.aoitori043.aoitorimapplugin.business.GuiManager;
 import io.aoitori043.aoitorimapplugin.business.OverlayManager;
+import io.aoitori043.aoitorimapplugin.business.gui.MapGuiImpl;
+import io.aoitori043.aoitorimapplugin.database.MapDatabaseClient;
+import io.aoitori043.aoitorimapplugin.database.MapPlayerProfile;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -55,30 +59,40 @@ public class FileWatcher {
                 Path filePath = (Path) event.context();
                 Path fullPath = dir.resolve(filePath);
 
-                AoitoriMapPlugin.plugin.getLogger().info("Event type: " + kind + ". File affected: " + fullPath);
-                if (kind == StandardWatchEventKinds.ENTRY_CREATE) {
-                    if (Files.isDirectory(fullPath)) {
-                        try {
-                            registerAll(fullPath);
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                if (MapConfigHandler.autoReloadConfig) {
+                    AoitoriMapPlugin.plugin.getLogger().info("Event type: " + kind + ". File affected: " + fullPath);
+                    if (kind == StandardWatchEventKinds.ENTRY_CREATE) {
+                        if (Files.isDirectory(fullPath)) {
+                            try {
+                                registerAll(fullPath);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+                            AoitoriMapPlugin.plugin.getLogger().info("File created: " + fullPath);
                         }
-                    } else {
-                        AoitoriMapPlugin.plugin.getLogger().info("File created: " + fullPath);
+                    } else if (kind == StandardWatchEventKinds.ENTRY_MODIFY) {
+                        AoitoriMapPlugin.plugin.getLogger().info("File modified: " + fullPath);
+                    } else if (kind == StandardWatchEventKinds.ENTRY_DELETE) {
+                        if (Files.isDirectory(fullPath)) {
+                            unregisterDir(fullPath);
+                        } else {
+                            AoitoriMapPlugin.plugin.getLogger().info("File deleted: " + fullPath);
+                        }
                     }
-                } else if (kind == StandardWatchEventKinds.ENTRY_MODIFY) {
-                    AoitoriMapPlugin.plugin.getLogger().info("File modified: " + fullPath);
-                } else if (kind == StandardWatchEventKinds.ENTRY_DELETE) {
-                    if (Files.isDirectory(fullPath)) {
-                        unregisterDir(fullPath);
-                    } else {
-                        AoitoriMapPlugin.plugin.getLogger().info("File deleted: " + fullPath);
-                    }
-                }
 
-                MapConfigHandler.load();
-                for (Player player : Bukkit.getOnlinePlayers()) {
-                    OverlayManager.sendAllOverlayData(player);
+                    MapConfigHandler.load();
+                    for (Player player : Bukkit.getOnlinePlayers()) {
+                        OverlayManager.sendAllOverlayData(player);
+                    }
+                    for (Map.Entry<String, MapPlayerProfile> entry : MapDatabaseClient.cache.entrySet()) {
+                        MapPlayerProfile value = entry.getValue();
+                        GuiManager guiManager = value.getGuiManager();
+                        for (Map.Entry<String, MapGuiImpl> implEntry : guiManager.getMapGuiMap().entrySet()) {
+                            implEntry.getValue().close(value.getPlayer());
+                        }
+                        value.getGuiManager().openInitGui();
+                    }
                 }
             }
 

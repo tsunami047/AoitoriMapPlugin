@@ -3,6 +3,8 @@ package io.aoitori043.aoitorimapplugin.config.mapper;
 import io.aoitori043.aoitoriproject.config.ConfigProperties;
 import io.aoitori043.aoitoriproject.config.Inject;
 import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -14,6 +16,8 @@ import java.util.List;
  */
 @ConfigProperties
 @Getter
+@Setter
+@Accessors(chain = true)
 public class GuiComponent {
 
     @Inject(type = Inject.InjectType.INDEX)

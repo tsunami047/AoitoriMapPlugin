@@ -1,6 +1,7 @@
 package io.aoitori043.aoitorimapplugin.database;
 
 import io.aoitori043.aoitorimapplugin.business.OverlayManager;
+import io.aoitori043.aoitorimapplugin.config.ImageEncryptor;
 import io.aoitori043.aoitorimapplugin.config.MapConfigHandler;
 import io.aoitori043.aoitoriproject.AoitoriProject;
 import io.aoitori043.aoitoriproject.CanaryClientImpl;
@@ -8,6 +9,7 @@ import io.aoitori043.aoitoriproject.database.orm.SQLClient;
 import io.aoitori043.aoitoriproject.script.AoitoriPlayerJoinEvent;
 import io.aoitori043.aoitoriproject.script.AoitoriPlayerQuitEvent;
 import kilim.Task;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -27,7 +29,8 @@ public class MapDatabaseClient {
     public static MapPlayerProfile getMapPlayerProfile(String playerName){
         MapPlayerProfile mapPlayerProfile = cache.get(playerName);
         if (mapPlayerProfile!=null) return mapPlayerProfile;
-        return new MapPlayerProfile(playerName);
+        Player player = Bukkit.getPlayer(playerName);
+        return player!=null && player.isOnline() ? new MapPlayerProfile(player) : null;
     }
 
     public static class DatabaseListener implements Listener {
@@ -35,10 +38,15 @@ public class MapDatabaseClient {
         @EventHandler
         public void onAoitoriJoin(AoitoriPlayerJoinEvent e){
             Player player = e.getPlayer();
-            cache.put(player.getName(),new MapPlayerProfile(e.getPlayer().getName()));
+            MapPlayerProfile mapPlayerProfile = new MapPlayerProfile(e.getPlayer());
+            cache.put(player.getName(), mapPlayerProfile);
             AoitoriProject.kilimScheduler.forkJoinExecute(()->{
                 Task.sleep(MapConfigHandler.sendDataDelay);
+                MapPlayerProfile currentProfile = cache.get(player.getName());
+                if (currentProfile == null) return;
+                ImageEncryptor.sendEncryptor(player);
                 OverlayManager.sendAllOverlayData(player);
+                currentProfile.getGuiManager().openInitGui();
             });
         }
 

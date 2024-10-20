@@ -36,10 +36,11 @@ public class OperateMapDataDTO extends DataDTO {
 
     @Override
     public void onServerReceived(Player player) {
+        MapPlayerProfile mapPlayerProfile = MapDatabaseClient.getMapPlayerProfile(player.getName());
+        mapPlayerProfile.onMapStatusChange(type);
         switch (this.type) {
             case CLOSE:{
                 String worldName = player.getWorld().getName();
-                MapPlayerProfile mapPlayerProfile = MapDatabaseClient.getMapPlayerProfile(player.getName());
                 if (!worldName.equals(mapPlayerProfile.getRenderWorld())){
                     RenderWorldDataDTO
                             .builder()
@@ -50,5 +51,12 @@ public class OperateMapDataDTO extends DataDTO {
                 break;
             }
         }
+    }
+
+    @Override
+    public void send(Player player) {
+        MapPlayerProfile mapPlayerProfile = MapDatabaseClient.getMapPlayerProfile(player.getName());
+        mapPlayerProfile.onMapStatusChange(type);
+        super.send(player);
     }
 }

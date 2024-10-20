@@ -3,6 +3,7 @@ package io.aoitori043.aoitorimapplugin.network;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import io.aoitori043.aoitorimapplugin.AoitoriMapPlugin;
+import io.aoitori043.aoitorimapplugin.config.mapper.GuiComponent;
 import io.aoitori043.aoitorimapplugin.network.serialize.DataDTO;
 import io.aoitori043.aoitorimapplugin.network.serialize.MapComponentDeserializer;
 import io.aoitori043.aoitorimapplugin.network.serialize.MapDataDTODeserializer;
@@ -13,6 +14,7 @@ import org.bukkit.plugin.messaging.PluginMessageListener;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
 
 /**
  * @Author: natsumi
@@ -25,7 +27,7 @@ public class NetworkImpl implements PluginMessageListener, Listener {
     public static final String CHANNEL_NAME = "aoitorimap";
     public static final Gson gson = new GsonBuilder()
             .registerTypeAdapter(DataDTO.class, new MapDataDTODeserializer())
-            .registerTypeAdapter(DataDTO.class, new MapComponentDeserializer())
+            .registerTypeAdapter(GuiComponent.class, new MapComponentDeserializer())
             .create();
 
     @Override
