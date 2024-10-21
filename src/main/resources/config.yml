@@ -2,6 +2,8 @@ version: 1.0
 message:
   prefix: "&7AoitoriMap &f>> "
 
+debugLevel: 0
+
 enableValidation: true
 kickValidationTimeout: false
 kickValidationTimeoutTime: 5000

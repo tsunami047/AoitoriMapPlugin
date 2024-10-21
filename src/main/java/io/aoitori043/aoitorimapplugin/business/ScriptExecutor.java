@@ -59,8 +59,8 @@ public class ScriptExecutor {
                 throw new UnsupportedOperationException("ScriptEngine does not support invoking functions");
             }
         }catch (Exception e){
-            checkRegisteredFunctions();
-            e.printStackTrace();
+//            checkRegisteredFunctions();
+//            e.printStackTrace();
         }
         return null;
     }

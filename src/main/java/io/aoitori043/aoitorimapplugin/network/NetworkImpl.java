@@ -3,6 +3,7 @@ package io.aoitori043.aoitorimapplugin.network;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import io.aoitori043.aoitorimapplugin.AoitoriMapPlugin;
+import io.aoitori043.aoitorimapplugin.config.DebugUtil;
 import io.aoitori043.aoitorimapplugin.config.mapper.GuiComponent;
 import io.aoitori043.aoitorimapplugin.network.serialize.DataDTO;
 import io.aoitori043.aoitorimapplugin.network.serialize.MapComponentDeserializer;
@@ -35,6 +36,7 @@ public class NetworkImpl implements PluginMessageListener, Listener {
         if (!channel.equals(CHANNEL_NAME)) return;
         singleExecutor.execute(()->{
             String text = new String(data, StandardCharsets.UTF_8);
+            DebugUtil.debug("received from " + player.getName() + "："+text, DebugUtil.DebugLevel.VERBOSE);
             DataDTO dataDTO = gson.fromJson(text, DataDTO.class);
             dataDTO.onServerReceived(player);
         });
@@ -45,7 +47,9 @@ public class NetworkImpl implements PluginMessageListener, Listener {
             return;
         }
         singleExecutor.execute(()->{
-            player.sendPluginMessage(AoitoriMapPlugin.plugin, CHANNEL_NAME, gson.toJson(dataDTO).getBytes(StandardCharsets.UTF_8));
+            String text = gson.toJson(dataDTO);
+            DebugUtil.debug("send to " +player.getName()+"："+text, DebugUtil.DebugLevel.VERBOSE);
+            player.sendPluginMessage(AoitoriMapPlugin.plugin, CHANNEL_NAME, text.getBytes(StandardCharsets.UTF_8));
         });
     }
 

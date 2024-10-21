@@ -10,6 +10,7 @@ import io.aoitori043.aoitorimapplugin.database.MapPlayerProfile;
 import io.aoitori043.aoitorimapplugin.network.NetworkImpl;
 import io.aoitori043.aoitorimapplugin.network.dto.OperateMapDataDTO;
 import io.aoitori043.aoitorimapplugin.network.dto.RenderWorldDataDTO;
+import io.aoitori043.aoitorimapplugin.network.dto.SecretKeyDataDTO;
 import io.aoitori043.aoitoriproject.command.*;
 import io.aoitori043.syncdistribute.rmi.data.PersistentDataAccess;
 import org.bukkit.Bukkit;
@@ -114,7 +115,7 @@ public class MapBasicCommand extends BasicCommand {
                 .send(arguments.get(0)!=null ? arguments.get(0).getAsPlayer() : Bukkit.getPlayer(sender.getName()));
     }
 
-    @Parameter(argument = "generateKey", help = "生成密钥")
+    @Parameter(argument = "generatekey", help = "生成密钥")
     public void generateKey(CommandSender sender, List<SubCommand.ArgumentHelper> arguments) {
         try {
             SecretKey secretKey = ImageEncryptor.generateSecretKey();
@@ -126,9 +127,14 @@ public class MapBasicCommand extends BasicCommand {
     }
 
     @Parameter(argument = "encrypt", help = "加密本体文件")
+    @ExecutionEndMessage(message = "完成")
     @ParameterSpecification(index = 0, tip = "player", type = ParameterSpecification.Type.Player,nullable = true)
     public void encrypt(CommandSender sender, List<SubCommand.ArgumentHelper> arguments) {
         try {
+            SecretKeyDataDTO.builder()
+                    .key(ImageEncryptor.byteKey)
+                    .build()
+                    .send(arguments.get(0).getAsPlayer());
             OperateMapDataDTO.builder()
                     .type(OperateMapDataDTO.MapOperateType.ENCRYPT)
                     .build()

@@ -64,6 +64,8 @@ public class MapConfigHandler extends BasicMapper {
     @InjectMappers(dir = "overlay")
     public static LinkedHashMap<String, OverlayMapper> overlay;
 
+    public static int debugLevel;
+
     public static List<String> permanentGUI;
     public static int sendDataDelay;
     public static boolean autoReloadConfig;
@@ -74,7 +76,7 @@ public class MapConfigHandler extends BasicMapper {
 
     @Override
     public void loadConfig() {
-
+        ImageEncryptor.load();
     }
 
 

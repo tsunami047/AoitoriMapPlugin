@@ -3,6 +3,7 @@ package io.aoitori043.aoitorimapplugin.database;
 import io.aoitori043.aoitorimapplugin.business.OverlayManager;
 import io.aoitori043.aoitorimapplugin.config.ImageEncryptor;
 import io.aoitori043.aoitorimapplugin.config.MapConfigHandler;
+import io.aoitori043.aoitorimapplugin.network.dto.VersionDataDTO;
 import io.aoitori043.aoitoriproject.AoitoriProject;
 import io.aoitori043.aoitoriproject.CanaryClientImpl;
 import io.aoitori043.aoitoriproject.database.orm.SQLClient;
@@ -44,6 +45,7 @@ public class MapDatabaseClient {
                 Task.sleep(MapConfigHandler.sendDataDelay);
                 MapPlayerProfile currentProfile = cache.get(player.getName());
                 if (currentProfile == null) return;
+                new VersionDataDTO().send(player);
                 ImageEncryptor.sendEncryptor(player);
                 OverlayManager.sendAllOverlayData(player);
                 currentProfile.getGuiManager().openInitGui();
