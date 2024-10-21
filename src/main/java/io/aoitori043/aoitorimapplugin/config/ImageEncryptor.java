@@ -20,7 +20,7 @@ public class ImageEncryptor {
 
     public static void sendEncryptor(Player player){
         SecretKeyDataDTO.builder()
-                .key(byteKey)
+                .key(null)
                 .build()
                 .send(player);
     }

@@ -52,7 +52,10 @@ public class MapDatabaseClient {
 
         @EventHandler
         public void onAoitoriQuit(AoitoriPlayerQuitEvent e){
-            cache.remove(e.getPlayer().getName());
+            String name = e.getPlayer().getName();
+            MapPlayerProfile mapPlayerProfile = cache.get(name);
+            mapPlayerProfile.quit = true;
+            cache.remove(name);
         }
     }
 

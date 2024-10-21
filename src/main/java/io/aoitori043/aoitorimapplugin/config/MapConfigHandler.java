@@ -68,6 +68,9 @@ public class MapConfigHandler extends BasicMapper {
     public static int sendDataDelay;
     public static boolean autoReloadConfig;
     public static String resourcesKey;
+    public static boolean kickValidationTimeout;
+    public static int kickValidationTimeoutTime;
+    public static boolean enableValidation;
 
     @Override
     public void loadConfig() {

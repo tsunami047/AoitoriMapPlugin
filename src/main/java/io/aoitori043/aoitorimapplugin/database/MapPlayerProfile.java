@@ -1,11 +1,15 @@
 package io.aoitori043.aoitorimapplugin.database;
 
+import io.aoitori043.aoitorimapplugin.AoitoriMapPlugin;
 import io.aoitori043.aoitorimapplugin.business.GuiManager;
 import io.aoitori043.aoitorimapplugin.business.OverlayManager;
+import io.aoitori043.aoitorimapplugin.config.MapConfigHandler;
 import io.aoitori043.aoitorimapplugin.network.dto.LocateOnDataDTO;
 import io.aoitori043.aoitorimapplugin.network.dto.OperateMapDataDTO;
 import io.aoitori043.aoitorimapplugin.network.dto.RenderWorldDataDTO;
 import io.aoitori043.aoitorimapplugin.network.dto.VariablesDataDTO;
+import io.aoitori043.aoitoriproject.AoitoriProject;
+import kilim.Task;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.entity.Player;
@@ -28,7 +32,15 @@ public class MapPlayerProfile {
         this.guiManager = GuiManager.builder()
                 .player(player)
                 .build();
-
+        this.joinTime = System.currentTimeMillis();
+        if (MapConfigHandler.kickValidationTimeout){
+            AoitoriProject.kilimScheduler.forkJoinExecute(()->{
+                Task.sleep(MapConfigHandler.kickValidationTimeoutTime);
+                if (!verified && !quit){
+                    player.kickPlayer("连接中止");
+                }
+            });
+        }
     }
 
     Player player;
@@ -38,6 +50,10 @@ public class MapPlayerProfile {
     GuiManager guiManager;
     boolean isOpen;
     boolean isMapping;
+    long joinTime;
+    @Setter
+    boolean verified;
+    boolean quit;
 
     public void onMapStatusChange(OperateMapDataDTO.MapOperateType mapOperateType){
         switch (mapOperateType) {

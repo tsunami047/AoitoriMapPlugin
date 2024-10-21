@@ -40,6 +40,7 @@ public class MapGuiImpl {
     @Getter
     Map<String, MapComponent> components;
 
+
     @Builder
     public MapGuiImpl(String guiName, Map<String, MapComponent> components, boolean hud) {
         this.guiName = guiName;
