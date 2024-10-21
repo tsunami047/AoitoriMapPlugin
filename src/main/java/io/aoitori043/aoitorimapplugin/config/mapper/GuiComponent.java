@@ -1,7 +1,10 @@
 package io.aoitori043.aoitorimapplugin.config.mapper;
 
+import io.aoitori043.aoitorimapplugin.AoitoriMapPlugin;
+import io.aoitori043.aoitorimapplugin.network.dto.ActionsDataDTO;
 import io.aoitori043.aoitoriproject.config.ConfigProperties;
 import io.aoitori043.aoitoriproject.config.Inject;
+import io.aoitori043.aoitoriproject.config.Run;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -32,4 +35,13 @@ public class GuiComponent {
     List<String> tooltips;
 
     LinkedHashMap<String,String> actions;
+
+    @Run(after = "actions")
+    void load(){
+        for (ActionsDataDTO.ClickMethod value : ActionsDataDTO.ClickMethod.values()) {
+            String key = value.toString().toLowerCase();
+            String script = actions.get(key);
+            AoitoriMapPlugin.scriptExecutor.addFunction(this.guiName+"_"+this.index+"_"+key,script);
+        }
+    }
 }

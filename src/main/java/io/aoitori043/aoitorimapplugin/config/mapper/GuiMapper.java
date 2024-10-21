@@ -90,17 +90,17 @@ public class GuiMapper {
         String height;
     }
 
-    @Run(after = "guiMapper")
-    void load(){
-        for (Map.Entry<String, GuiComponent> entry : components.entrySet()) {
-            GuiComponent guiComponent = entry.getValue();
-            for (ActionsDataDTO.ClickMethod value : ActionsDataDTO.ClickMethod.values()) {
-                String key = value.toString().toLowerCase();
-                String script = guiComponent.getActions().get(key);
-                AoitoriMapPlugin.scriptExecutor.addFunction(this.index+"_"+entry.getKey()+"_"+key,script);
-            }
-        }
-    }
+//    @Run(after = "components")
+//    void load(){
+//        for (Map.Entry<String, GuiComponent> entry : components.entrySet()) {
+//            GuiComponent guiComponent = entry.getValue();
+//            for (ActionsDataDTO.ClickMethod value : ActionsDataDTO.ClickMethod.values()) {
+//                String key = value.toString().toLowerCase();
+//                String script = guiComponent.getActions().get(key);
+//                AoitoriMapPlugin.scriptExecutor.addFunction(this.index+"_"+entry.getKey()+"_"+key,script);
+//            }
+//        }
+//    }
 
 
 
