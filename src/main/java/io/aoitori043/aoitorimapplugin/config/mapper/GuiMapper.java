@@ -88,6 +88,16 @@ public class GuiMapper {
         String hoverPath;
         String width;
         String height;
+
+        @Run(after = "actions")
+        void load(){
+            for (ActionsDataDTO.ClickMethod value : ActionsDataDTO.ClickMethod.values()) {
+                String key = value.toString().toLowerCase();
+                String script = actions.get(key);
+                if (script == null) continue;
+                AoitoriMapPlugin.scriptExecutor.addFunction(this.guiName+"_"+this.index+"_"+key,script);
+            }
+        }
     }
 
 //    @Run(after = "components")

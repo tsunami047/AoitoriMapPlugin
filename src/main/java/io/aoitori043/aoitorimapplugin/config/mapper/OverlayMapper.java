@@ -81,6 +81,7 @@ public class OverlayMapper {
         for (ActionsDataDTO.ClickMethod value : ActionsDataDTO.ClickMethod.values()) {
             String key = value.toString().toLowerCase();
             String script = actions.get(key);
+            if (script == null) continue;
             AoitoriMapPlugin.scriptExecutor.addFunction("overlay_"+this.index+"_"+key,script);
         }
     }
