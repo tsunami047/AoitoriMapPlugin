@@ -10,6 +10,7 @@ import lombok.Getter;
 */
 @Getter
 public enum DataDTOType {
+    TILE_FILE(TileFileDataDTO.class),
     VERSION(VersionDataDTO.class),
     SECRET_KEY(SecretKeyDataDTO.class),
     UPDATE_COMPONENTS(UpdateComponentsDataDTO.class),

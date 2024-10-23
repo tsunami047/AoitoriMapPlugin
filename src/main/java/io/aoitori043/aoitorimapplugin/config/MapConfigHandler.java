@@ -6,6 +6,7 @@ import io.aoitori043.aoitorimapplugin.business.OverlayManager;
 import io.aoitori043.aoitorimapplugin.business.ScriptExecutor;
 import io.aoitori043.aoitorimapplugin.config.mapper.GuiMapper;
 import io.aoitori043.aoitorimapplugin.config.mapper.OverlayMapper;
+import io.aoitori043.aoitorimapplugin.config.mapper.TileMapper;
 import io.aoitori043.aoitorimapplugin.database.MapDatabaseClient;
 import io.aoitori043.aoitorimapplugin.database.MapPlayerProfile;
 import io.aoitori043.aoitorimapplugin.network.NetworkImpl;
@@ -63,6 +64,8 @@ public class MapConfigHandler extends BasicMapper {
     public static LinkedHashMap<String, GuiMapper> gui;
     @InjectMappers(dir = "overlay")
     public static LinkedHashMap<String, OverlayMapper> overlay;
+    @InjectMapper(path = "tile",singe = false)
+    public static LinkedHashMap<String, TileMapper> tile;
 
     public static int debugLevel;
 
@@ -73,6 +76,7 @@ public class MapConfigHandler extends BasicMapper {
     public static boolean kickValidationTimeout;
     public static int kickValidationTimeoutTime;
     public static boolean enableValidation;
+    public static boolean displayAuthorLogo;
 
     @Override
     public void loadConfig() {

@@ -24,7 +24,9 @@ public class OperateMapDataDTO extends DataDTO {
         REFRESH,
         STOP_MAPPING,
         START_MAPPING,
-        ENCRYPT
+        ENCRYPT,
+        DISPLAY_AUTHOR_LOGO,
+        NOT_DISPLAY_AUTHOR_LOGO
     }
 
     @Builder

@@ -28,18 +28,4 @@ public class BukkitEventListener implements Listener {
                 .send(player);
     }
 
-    @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent e){
-        AoitoriProject.kilimScheduler.forkJoinExecute(()->{
-            Task.sleep(1000);
-            Player player = e.getPlayer();
-            World world = player.getWorld();
-            WorldRequestDataDTO
-                    .builder()
-                    .worldName(world.getName())
-                    .build()
-                    .send(player);
-        });
-
-    }
 }
